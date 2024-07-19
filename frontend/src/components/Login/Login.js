@@ -67,7 +67,7 @@ const Login = () => {
               {" "}
               <LockIcon />
             </Avatar>
-            <Typography variant="h5" color="primary">
+            <Typography className="miltonian-regular" variant="h5" color="primary">
               {isLoggedIn ? "Login" : "Logout"}
             </Typography>
             <form sx={styles.form} onSubmit={handleSubmit}>
@@ -109,6 +109,7 @@ const Login = () => {
                 {!isLoggedIn && (
                   <>
                     <Input
+                    className="miltonian-regular"
                       name="confirmPassword"
                       label="Confirm Password"
                       handleChange={handleChange}
@@ -122,6 +123,7 @@ const Login = () => {
                 type="submit"
                 sx={styles.submit}
                 fullWidth
+                className="miltonian-regular"
                 variant="contained"
                 color="primary"
               >
@@ -129,7 +131,7 @@ const Login = () => {
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Button onClick={switchLogin}>
+                  <Button className="miltonian-regular" onClick={switchLogin}>
                     {isLoggedIn
                       ? "Don't Have An Account? Sign Up."
                       : "Already Have An Account? Login."}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { AppBar, Typography, Toolbar, Avatar, Button } from "@mui/material";
+import { AppBar, Typography, Toolbar, Avatar, Button, Stack, Grid } from "@mui/material";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { jwtDecode } from "jwt-decode";
 import * as actionType from "../../constants/actionTypes";
 import { styles } from "./styles";
@@ -12,6 +12,9 @@ const Navbar = () => {
       ? jwtDecode(JSON.parse(localStorage.getItem("profile")).token)
       : "null"
   );
+
+  const balance = useSelector((state) => state.ledger.balance);
+
   const dispatch = useDispatch();
   let location = useLocation();
   const history = useNavigate();
@@ -35,55 +38,50 @@ const Navbar = () => {
 
   return (
     <AppBar sx={styles.appBar} position="static" color="inherit">
-      <div sx={styles.brandContainer}>
-        <Typography
-          component={Link}
-          to="/"
-          sx={styles.heading}
-          variant="h5"
-          align="center"
-        >
-          CoinToss
-        </Typography>
-      </div>
-      <Toolbar sx={styles.toolbar}>
-        {user !== "null" && user !== null ? (
-          <div sx={styles.profile}>
-            <Avatar sx={styles.purple} alt={user.name} src={user.picture}>
-              {user.name.charAt(0)}
-            </Avatar>
-            <Typography sx={styles.userName} variant="h6">
-              {user.name}
-            </Typography>
-            <Button
-              variant="contained"
-              sx={styles.logout}
-              color="secondary"
-              onClick={logout}
-            >
-              Logout
-            </Button>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={() => {
-                history("/password");
-              }}
-            >
-              Set Password
-            </Button>
-          </div>
-        ) : (
-          <Button
+      <Grid container direction="row" spacing={5} alignItems="center" justifyContent="space-between" sx={{ maxWidth: '100%' }}>
+        <Grid item xs={12} md={6} l={3} xl={6} sx={{ maxWidth: '100%' }}>
+          <Typography
             component={Link}
-            to="/auth"
-            variant="contained"
-            color="primary"
+            className="gamblin-jack-font"
+            to="/"
+            sx={{ ...styles.heading, whiteSpace: 'nowrap', color: "white" }}
+            variant="h1"
+            align="left"
           >
-            Login
-          </Button>
-        )}
-      </Toolbar>
+            Gamblin' Jack's
+          </Typography>
+          <Typography variant="h3"
+            sx={{
+              p: 1,
+              color: "white",
+              whiteSpace: 'nowrap',
+            }}
+            align="center" className="miltonian-regular">
+            Coin Toss Casino
+          </Typography>
+          <Typography align="center" variant="subtitle1" sx={{ color: "white", }} align="center" className="miltonian-regular">
+            "Even a broken clock is right twice a day"
+          </Typography>
+        </Grid>
+        <Grid item xs={12} md={2} xl={2} sx={{ display: 'flex', justifyContent: 'center' }} >
+          {user !== "null" && user !== null ? (
+            <Stack justifyContent={"center"} direction="column">
+              <Typography className="gamblin-jack-font" sx={{ ...styles.userName, color: 'white' }} variant="h6">
+                {user.name}
+              </Typography>
+              <Button
+                variant="contained"
+                className="miltonian-regular"
+                sx={styles.logout}
+                color="secondary"
+                onClick={logout}
+              >
+                Logout
+              </Button>
+            </Stack>
+          ) : <></>}
+        </Grid>
+      </Grid>
     </AppBar>
   );
 };

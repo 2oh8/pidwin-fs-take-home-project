@@ -12,6 +12,7 @@ const Input = ({
   autoFocus,
   type,
   handleShowPassword,
+  inputProps
 }) => (
   <Grid item xs={12} sm={half ? 6 : 12}>
     <TextField
@@ -26,7 +27,8 @@ const Input = ({
       value={value}
       InputProps={
         name === "password" || name === "oldPassword"
-          ? {
+        ? {
+            ...inputProps,
             endAdornment: (
               <InputAdornment position="end">
                 <IconButton onClick={handleShowPassword}>
@@ -35,7 +37,7 @@ const Input = ({
               </InputAdornment>
             ),
           }
-          : null
+          : {...inputProps}
       }
     />
   </Grid>

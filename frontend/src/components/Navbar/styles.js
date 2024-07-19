@@ -1,6 +1,6 @@
 import { theme } from "../../themes/Default";
 
-import { deepPurple } from "@mui/material/colors";
+import { deepPurple, grey } from "@mui/material/colors";
 
 export const styles = {
   appBar: {
@@ -11,9 +11,9 @@ export const styles = {
     justifyContent: "space-between",
     alignItems: "center",
     padding: "10px 50px",
+    backgroundColor: "#212121 !important"
   },
   heading: {
-    color: "rgba(0,183,255, 1)",
     textDecoration: "none",
   },
   toolbar: {

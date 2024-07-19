@@ -1,6 +1,9 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/user.js";
+import LedgerEntry from "../models/ledgerEntry.js";
+import ledgerEntryTypes from "../enums/ledgerEntryTypes.js";
+import reasons from "../utils/transactionReasons.js"
 
 const signup = async (req, res) => {
   const { email, password, confirmPassword, firstName, lastName } = req.body;
@@ -31,6 +34,9 @@ const signup = async (req, res) => {
       "test",
       { expiresIn: "1h" }
     );
+
+    // Initial registration credit of 100 tokens
+    LedgerEntry.create({userId: result._id, type: ledgerEntryTypes.credit, amount: 100, reason: reasons.FUNDS_GIFTED})
 
     res.status(200).json({ token });
   } catch (error) {

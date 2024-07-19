@@ -1,3 +1,34 @@
 body {
-  background-color: #e9e9e9;
+  background-color: black;
+}
+
+.gamblin-jack-font {
+  font-family: "Great Vibes", cursive !important;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.playfair {
+  font-family: "Playfair Display", serif !important;
+  font-optical-sizing: auto;
+  font-weight: 400; /* Example: replaced <weight> with an actual value */
+  font-style: normal;
+}
+
+.notable-regular {
+  font-family: "Notable", sans-serif !important;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.bungee-shade-regular {
+  font-family: "Bungee Shade", sans-serif !important;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.miltonian-regular {
+  font-family: "Miltonian", serif !important;
+  font-weight: 400;
+  font-style: normal;
 }
