@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import * as messages from "../../messages";
 
@@ -30,6 +31,8 @@ const Home = () => {
 
   const [formData, setFormData] = useState(formDataInitVal);
   const [showGiphy, setShowGiphy] = useState(false);
+
+  const history = useNavigate();
 
   const user = localStorage.getItem("profile")
     ? jwtDecode(JSON.parse(localStorage.getItem("profile")).token)
@@ -82,6 +85,8 @@ const Home = () => {
         dispatch(getLedgerBalance());
         dispatch(getLedgerEntries());
       }
+    } else {
+      history("/auth");
     }
   }, [dispatch, user]);
 

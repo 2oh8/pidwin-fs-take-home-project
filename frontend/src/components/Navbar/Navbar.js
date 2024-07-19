@@ -13,8 +13,6 @@ const Navbar = () => {
       : "null"
   );
 
-  const balance = useSelector((state) => state.ledger.balance);
-
   const dispatch = useDispatch();
   let location = useLocation();
   const history = useNavigate();
@@ -59,7 +57,7 @@ const Navbar = () => {
             align="center" className="miltonian-regular">
             Coin Toss Casino
           </Typography>
-          <Typography align="center" variant="subtitle1" sx={{ color: "white", }} align="center" className="miltonian-regular">
+          <Typography variant="subtitle1" sx={{ color: "white", }} align="center" className="miltonian-regular">
             "Even a broken clock is right twice a day"
           </Typography>
         </Grid>
