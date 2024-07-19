@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ limit: "5mb", extended: true }));
 app.use(cors());
 app.use("/api/user", userRouter);
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 80;
 
 console.log(process.env)
 
