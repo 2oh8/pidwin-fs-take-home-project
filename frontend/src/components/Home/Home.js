@@ -47,7 +47,7 @@ const Home = () => {
 
   useEffect(() => {
     const entry = entries?.[0]
-    const message = `${entry.type === 'credit' ? '+' : '-'}${entry.amount} ${entry.description}`
+    const message = `${entry?.type === 'credit' ? '+' : '-'}${entry?.amount} ${entry?.description}`
     if (entry) {
       if (entry.type === "credit") {
         messages.success(message)
