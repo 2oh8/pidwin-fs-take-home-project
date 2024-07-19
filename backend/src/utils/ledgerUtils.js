@@ -57,7 +57,7 @@ export const addLedgerEntriesForOutcome = async (userId, amountWagered, userWonC
     try {
         let currentWinningStreak = await getUserWinningStreak(userId);
 
-        let payoutMultiplier = 1;
+        let payoutMultiplier = 2;
 
         if (userWonCoinToss) {
             currentWinningStreak += 1
