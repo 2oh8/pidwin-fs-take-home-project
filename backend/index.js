@@ -11,7 +11,7 @@ const app = express();
 app.use(bodyParser.json({ limit: "5mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "5mb", extended: true }));
 
-// app.use(cors());
+app.use(cors());
 app.use("/api/user", userRouter);
 
 const PORT = process.env.PORT || 80;
