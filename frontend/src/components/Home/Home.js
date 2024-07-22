@@ -147,7 +147,7 @@ const Home = () => {
             </Box>
           </Stack>
         }
-        {!showGiphy && <Paper sx={{ backgroundColor: "black !important", color: "white" }} elevation={0}>
+        {!showGiphy && <Paper sx={{ backgroundColor: "black !important" }} elevation={0}>
           <form sx={styles.form} onSubmit={handleSubmit}>
             <Stack sx={{ p: 1, width: '100' }} spacing={2} justifyContent="center" direction={"column"}>
               <Stack sx={{ p: 1, width: '100' }} direction="row" justifyContent="center">
@@ -169,8 +169,8 @@ const Home = () => {
                 defaultValue="heads"
                 name="selectedOutcome"
               >
-                <FormControlLabel onChange={handleChange} value="heads" control={<Radio />} label={<Typography className="honk" variant="h2" color="white">Heads</Typography>} />
-                <FormControlLabel onChange={handleChange} value="tails" control={<Radio />} label={<Typography className="honk" variant="h2" color="white">Tails</Typography>} />
+                <FormControlLabel onChange={handleChange} value="heads" control={<Radio />} label={<Typography className="honk" variant="h2">Heads</Typography>} />
+                <FormControlLabel onChange={handleChange} value="tails" control={<Radio />} label={<Typography className="honk" variant="h2">Tails</Typography>} />
               </RadioGroup>
               <Button
                 type="submit"
@@ -191,7 +191,7 @@ const Home = () => {
                   <Card sx={{ backgroundColor: type === 'credit' ? '#00c853' : '#d50000' }} variant="outlined" justifyContent="center" sx={{ mt: 4 }}>
                     <CardContent>
                       <Stack direction="row" justifyContent="space-between" >
-                        <Typography sx={{ color: type === 'credit' ? '#00c853' : '#d50000' }} className="honk" variant="h1" component="div">
+                        <Typography className="honk" variant="h1" component="div">
                           {type === 'credit' ? '+' : '-'}{amount}
                         </Typography>
                         {multiplier > 1 &&
