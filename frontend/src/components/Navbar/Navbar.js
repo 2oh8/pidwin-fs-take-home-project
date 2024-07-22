@@ -41,7 +41,7 @@ const Navbar = () => {
           component={Link}
           className="honk"
           to="/"
-          sx={{ ...styles.heading, whiteSpace: 'nowrap', fontColor: "none" }}
+          sx={{ ...styles.heading, whiteSpace: 'nowrap', color: "white" }}
           variant="h1"
           align="left"
         >
@@ -62,7 +62,7 @@ const Navbar = () => {
         </Typography> */}
         {user !== "null" && user !== null ? (
           <Stack justifyContent={"center"} direction="column">
-            <Typography className="honk" sx={{ ...styles.userName, mt: 2 }} variant="h4">
+            <Typography className="honk" sx={{ ...styles.userName, color: 'white', mt: 2 }} variant="h4">
               {user.name}
             </Typography>
             <Button
