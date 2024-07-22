@@ -34,12 +34,14 @@ const Login = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (isLoggedIn) {
-      dispatch(login(formData, history));
+      await dispatch(login(formData, history));
+      window.location.reload()
     } else {
-      dispatch(signup(formData, history));
+      await dispatch(signup(formData, history));
+      window.location.reload()
     }
   };
 
