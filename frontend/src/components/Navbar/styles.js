@@ -5,13 +5,14 @@ import { deepPurple, grey } from "@mui/material/colors";
 export const styles = {
   appBar: {
     borderRadius: 15,
-    margin: "30px 0",
+    // margin: "30px 0",
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
-    padding: "10px 50px",
-    backgroundColor: "#212121 !important"
+    // padding: "10px 50px",
+    backgroundColor: "transparent !important",
+    backgroundImage: "none;"
   },
   heading: {
     textDecoration: "none",

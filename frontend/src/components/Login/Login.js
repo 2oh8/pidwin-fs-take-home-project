@@ -67,8 +67,8 @@ const Login = () => {
               {" "}
               <LockIcon />
             </Avatar>
-            <Typography className="miltonian-regular" variant="h5" color="primary">
-              {isLoggedIn ? "Login" : "Logout"}
+            <Typography className="honk" variant="h2" color="primary">
+              {isLoggedIn ? "Log In" : "Log Out"}
             </Typography>
             <form sx={styles.form} onSubmit={handleSubmit}>
               <Grid container spacing={2}>
@@ -78,6 +78,7 @@ const Login = () => {
                       name="firstName"
                       label="First Name"
                       handleChange={handleChange}
+                      color="primary"
                       autoFocus
                       half
                     />
@@ -123,7 +124,7 @@ const Login = () => {
                 type="submit"
                 sx={styles.submit}
                 fullWidth
-                className="miltonian-regular"
+                className="grandstander"
                 variant="contained"
                 color="primary"
               >
@@ -131,7 +132,7 @@ const Login = () => {
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Button className="miltonian-regular" onClick={switchLogin}>
+                  <Button className="grandstander" onClick={switchLogin}>
                     {isLoggedIn
                       ? "Don't Have An Account? Sign Up."
                       : "Already Have An Account? Login."}

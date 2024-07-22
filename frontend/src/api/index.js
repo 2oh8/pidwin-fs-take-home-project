@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "https://gamblin-jacks-779a936b740d.herokuapp.com/" });
+const API = axios.create({ baseURL: "https://api.gamblinjacks.com/" });
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("profile")) {
     req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem("profile")).token
@@ -16,6 +16,6 @@ export const changePassword = (formData) =>
 
 export const getLedgerBalance = () => API.get("/api/ledger/balance");
 export const getLedgerEntries = () => API.get("/api/ledger/entries");
-export const getGiphyCointoss = () => API.get("/api/giphy/coin_flip");
+export const getGiphyCointoss = () => API.get("/api/giphy/coin+flip");
 
 export const wager = (formData) => API.post("/api/wager", formData);

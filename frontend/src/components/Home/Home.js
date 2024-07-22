@@ -13,6 +13,12 @@ import {
   Paper,
   Typography,
   Stack,
+  CircularProgress,
+  Card,
+  CardContent,
+  CardActions,
+  Box,
+  Fab
 } from "@mui/material";
 
 import Input from "../Login/Input";
@@ -23,11 +29,21 @@ import { getLedgerBalance, getLedgerEntries } from "../../actions/ledger";
 import { getCoinTossGiphy } from "../../actions/giphy";
 import { useDispatch, useSelector } from "react-redux";
 
+import HelpOutlineSharpIcon from '@mui/icons-material/HelpOutlineSharp';
+
 const Home = () => {
   const formDataInitVal = {
     wagerAmount: 0,
     selectedOutcome: "heads"
   };
+
+  const slotPull = new Audio("/slotpull.mp3")
+  const win = new Audio("/win.wav")
+  const coin = new Audio("/coin.wav")
+
+  const [muteInteractives, setMuteInteractives] = useState(true);
+  win.muted = muteInteractives;
+  coin.muted = muteInteractives;
 
   const [formData, setFormData] = useState(formDataInitVal);
   const [showGiphy, setShowGiphy] = useState(false);
@@ -53,8 +69,18 @@ const Home = () => {
     const message = `${entry?.type === 'credit' ? '+' : '-'}${entry?.amount} ${entry?.description}`
     if (entry) {
       if (entry.type === "credit") {
+        try {  
+          win.play()
+        } catch (e) {
+          // no-op
+        }
         messages.success(message)
       } else {
+        try {
+          coin.play()
+        } catch (e) {
+          // no-op
+        }
         messages.error(message)
       }
     }
@@ -63,10 +89,12 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
+    setMuteInteractives(false)
     const GIPHY_APPEAR_MS_BUFFER = 1500
     e.preventDefault();
     await dispatch(getCoinTossGiphy());
     setShowGiphy(true)
+    slotPull.play()
     await toggleGiphyImageVisibility
     await dispatch(wager(formData));
     await dispatch(getLedgerBalance());
@@ -94,20 +122,42 @@ const Home = () => {
     <Grow in>
       <Container component="main" maxWidth="md">
         {showGiphy && <img style={{ width: "100%", maxHeight: "65vh" }} src={giphy} />}
-        {!showGiphy && <Paper sx={{ mt: 3, backgroundColor: "black !important", color: "white" }} elevation={0}>
+        {showGiphy &&
+          <Stack sx={{ pt: 8, width: '100' }} spacing={2} justifyContent="center" direction="row">
+            <Box sx={{ m: 1, position: 'relative' }}>
+              <Fab
+                size="large"
+                aria-label="save"
+                color="primary"
+              >
+                <HelpOutlineSharpIcon />
+              </Fab>
+              {showGiphy && (
+                <CircularProgress
+                  size={68}
+                  sx={{
+                    color: 'primary',
+                    position: 'absolute',
+                    top: -6,
+                    left: -6,
+                    zIndex: 1,
+                  }}
+                />
+              )}
+            </Box>
+          </Stack>
+        }
+        {!showGiphy && <Paper sx={{ backgroundColor: "black !important", color: "white" }} elevation={0}>
           <form sx={styles.form} onSubmit={handleSubmit}>
             <Stack sx={{ p: 1, width: '100' }} spacing={2} justifyContent="center" direction={"column"}>
-              <Typography alignSelf="center" className="bungee-shade-regular" variant="h1">
-                {balance}
-              </Typography>
+              <Stack sx={{ p: 1, width: '100' }} direction="row" justifyContent="center">
+                <Typography sx={{ fontSize: 100 }} alignSelf="center" className="honk">
+                  {balance}
+                </Typography>
+                <Typography className="honk" sx={{ fontSize: 25, bottom: -70, right: -10, position: "relative" }}>cr</Typography>
+              </Stack>
               <Input
                 type="number"
-                InputProps={{
-                  classes: {
-                    input: { color: "white" }
-                  }
-                }}
-                fontColor="white"
                 name="wagerAmount"
                 label="Wager Amount"
                 handleChange={handleChange}
@@ -119,8 +169,8 @@ const Home = () => {
                 defaultValue="heads"
                 name="selectedOutcome"
               >
-                <FormControlLabel onChange={handleChange} value="heads" control={<Radio />} label="Heads" />
-                <FormControlLabel onChange={handleChange} value="tails" control={<Radio />} label="Tails" />
+                <FormControlLabel onChange={handleChange} value="heads" control={<Radio />} label={<Typography className="honk" variant="h2" color="white">Heads</Typography>} />
+                <FormControlLabel onChange={handleChange} value="tails" control={<Radio />} label={<Typography className="honk" variant="h2" color="white">Tails</Typography>} />
               </RadioGroup>
               <Button
                 type="submit"
@@ -129,16 +179,38 @@ const Home = () => {
                 fullWidth
                 variant="contained"
               >
-                <Typography className="miltonian-regular" variant="h3">
+                <Typography className="honk" variant="h3">
                   PLACE BET
                 </Typography>
               </Button>
             </Stack>
-            <Stack sx={{ p: 1 }} direction={'column'}>
-              {entries.map(({ type, amount, description, reason, multiplier }) => (
-                <Paper className="bungee-shade-regular" elevation={0} sx={{ mt: 3, fontSize: 25, backgroundColor: "transparent", color: type === 'credit' ? '#00c853' : '#d50000' }}>{type === 'credit' ? '+' : '-'}{amount} {description ? description : reason} {multiplier > 1 ? `(${multiplier}x Bonus Win)` : ''}</Paper>
-              ))}
-            </Stack>
+            <div style={{ width: "100%", maxHeight: "350px", overflowY: "scroll" }}>
+
+              <Stack sx={{ p: 1 }} direction={'column'}>
+                {entries.map(({ type, amount, description, reason, multiplier }) => (
+                  <Card sx={{ backgroundColor: type === 'credit' ? '#00c853' : '#d50000' }} variant="outlined" justifyContent="center" sx={{ mt: 4 }}>
+                    <CardContent>
+                      <Stack direction="row" justifyContent="space-between" >
+                        <Typography sx={{ color: type === 'credit' ? '#00c853' : '#d50000' }} className="honk" variant="h1" component="div">
+                          {type === 'credit' ? '+' : '-'}{amount}
+                        </Typography>
+                        {multiplier > 1 &&
+                          <Typography sx={{ color: type === 'credit' ? '#00c853' : '#d50000' }} className="honk" variant="h1" component="div">
+                            {multiplier}x
+                          </Typography>
+                        }
+                      </Stack>
+                      <Typography sx={{ mb: 1.5, color: type === 'credit' ? '#00c853' : '#d50000' }} className="grandstander" color="text.secondary">
+                        {reason}
+                      </Typography>
+                      <Typography className="grandstander" variant="body2">
+                        {description}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                ))}
+              </Stack>
+            </div>
           </form>
         </Paper>
         }

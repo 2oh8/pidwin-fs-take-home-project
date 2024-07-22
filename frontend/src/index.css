@@ -2,6 +2,11 @@ body {
   background-color: black;
 }
 
+iframe
+{
+    display: none;
+}
+
 .gamblin-jack-font {
   font-family: "Great Vibes", cursive !important;
   font-weight: 800;
@@ -11,7 +16,8 @@ body {
 .playfair {
   font-family: "Playfair Display", serif !important;
   font-optical-sizing: auto;
-  font-weight: 400; /* Example: replaced <weight> with an actual value */
+  font-weight: 400;
+  /* Example: replaced <weight> with an actual value */
   font-style: normal;
 }
 
@@ -29,6 +35,29 @@ body {
 
 .miltonian-regular {
   font-family: "Miltonian", serif !important;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.bungee-spice-regular {
+  font-family: "Bungee Spice", sans-serif !important;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.honk {
+  font-family: "Honk", system-ui !important;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "MORF" 15,
+    "SHLN" 50;
+}
+
+.grandstander {
+  font-family: "Grandstander", cursive !important;
+  font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
 }
