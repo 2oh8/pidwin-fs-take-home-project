@@ -41,7 +41,7 @@ const Navbar = () => {
           component={Link}
           className="honk"
           to="/"
-          sx={{ ...styles.heading, whiteSpace: 'nowrap' }}
+          sx={{ ...styles.heading, whiteSpace: 'nowrap', fontColor: "none" }}
           variant="h1"
           align="left"
         >
