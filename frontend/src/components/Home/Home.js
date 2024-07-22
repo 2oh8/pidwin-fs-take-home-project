@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import * as messages from "../../messages";
+import moment from "moment";
 
 import {
   Grow,
@@ -187,7 +188,7 @@ const Home = () => {
             <div style={{ width: "100%", maxHeight: "350px", overflowY: "scroll" }}>
 
               <Stack sx={{ p: 1 }} direction={'column'}>
-                {entries.map(({ type, amount, description, reason, multiplier }) => (
+                {entries.map(({ type, amount, description, reason, multiplier, createdAt }) => (
                   <Card sx={{ backgroundColor: type === 'credit' ? '#00c853' : '#d50000' }} variant="outlined" justifyContent="center" sx={{ mt: 4 }}>
                     <CardContent>
                       <Stack direction="row" justifyContent="space-between" >
@@ -203,9 +204,14 @@ const Home = () => {
                       <Typography sx={{ mb: 1.5, color: type === 'credit' ? '#00c853' : '#d50000' }} className="grandstander" color="text.secondary">
                         {reason}
                       </Typography>
+                      <Stack direction="row" justifyContent="space-between" >
                       <Typography className="grandstander" variant="body2">
                         {description}
                       </Typography>
+                      <Typography className="grandstander" variant="body2">
+                        {moment(createdAt).fromNow()}
+                      </Typography>
+                      </Stack>
                     </CardContent>
                   </Card>
                 ))}
