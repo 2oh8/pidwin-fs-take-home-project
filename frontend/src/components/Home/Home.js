@@ -193,7 +193,7 @@ const Home = () => {
                     <CardContent>
                       <Stack direction="row" justifyContent="space-between" >
                         <Typography sx={{ color: type === 'credit' ? '#00c853' : '#d50000' }} className="honk" variant="h1" component="div">
-                          {type === 'credit' ? '+' : '-'}{amount}
+                          {type === 'credit' ? '+' : '-'}{Math.abs(amount)}
                         </Typography>
                         {multiplier > 1 &&
                           <Typography sx={{ color: type === 'credit' ? '#00c853' : '#d50000' }} className="honk" variant="h1" component="div">
