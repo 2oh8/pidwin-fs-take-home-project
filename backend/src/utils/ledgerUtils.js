@@ -9,10 +9,11 @@ export const calculateUserLedgerBalance = async (userId) => {
         let balance = 0;
 
         ledgerEntries.forEach(entry => {
+            const amount = Math.abs(entry.amount)
             if (entry.type === 'credit') {
-                balance += entry.amount;
+                balance += amount;
             } else if (entry.type === 'debit') {
-                balance -= entry.amount;
+                balance -= amount;
             }
         });
 

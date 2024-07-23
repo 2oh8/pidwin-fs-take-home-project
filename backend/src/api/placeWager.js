@@ -12,14 +12,18 @@ export const placeWager = async (req, res) => {
         }
 
         const balance = await calculateUserLedgerBalance(userId)
-        const isValidWager = balance > 0 && balance >= wagerAmount
+        const isValidWager = balance > 0 && balance >= wagerAmount && wagerAmount > 0
 
         if (isValidWager) {
             const { outcome, userWonCoinToss } = coinToss(selectedOutcome)
             await addLedgerEntriesForOutcome(userId, wagerAmount, userWonCoinToss)
             res.status(200).json({ outcome, userWonCoinToss });
         } else {
-            throw new Error("Wagered amount exceeds account balance")
+            if (wagerAmount <= 0) {
+                throw new Error('Invalid wager amount. Must be a positive number.')
+            } else {
+                throw new Error("Wagered amount exceeds account balance")
+            }
         }
     } catch (error) {
         console.log(error)
