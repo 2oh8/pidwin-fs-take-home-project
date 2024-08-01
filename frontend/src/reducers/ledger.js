@@ -1,6 +1,6 @@
-import { LEDGER_BALANCE, LEDGER_ENTRIES } from '../constants/actionTypes';
+import { LEDGER_BALANCE, LEDGER_ENTRIES, LEADERBOARD } from '../constants/actionTypes';
 
-const ledgerReducer = (state = { balance: 0, entries: [] }, action) => {
+const ledgerReducer = (state = { balance: 0, entries: [], leaderBoard: [] }, action) => {
     let newState;
     switch (action.type) {
         case LEDGER_BALANCE:
@@ -8,6 +8,9 @@ const ledgerReducer = (state = { balance: 0, entries: [] }, action) => {
             break;
         case LEDGER_ENTRIES:
             newState = { ...state, entries: action?.data.entries };
+            break;
+        case LEADERBOARD:
+            newState = { ...state, leaderBoard: action?.data.leaderBoard };
             break;
         default:
             return state;

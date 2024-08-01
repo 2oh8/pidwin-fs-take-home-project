@@ -5,12 +5,12 @@ import { deepPurple, grey } from "@mui/material/colors";
 export const styles = {
   appBar: {
     borderRadius: 15,
-    // margin: "30px 0",
+    margin: "0",
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    // padding: "10px 50px",
+    padding: "0px",
     backgroundColor: "transparent !important",
     backgroundImage: "none;"
   },

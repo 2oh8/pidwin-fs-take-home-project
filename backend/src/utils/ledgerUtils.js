@@ -75,7 +75,7 @@ export const addLedgerEntriesForOutcome = async (userId, amountWagered, userWonC
             await LedgerEntry.create({
                 userId,
                 type: ledgerEntryTypes.credit,
-                amount: amountWagered * payoutMultiplier,
+                amount: (amountWagered * payoutMultiplier) - amountWagered,
                 description: `Winning wager with ${currentWinningStreak} win${currentWinningStreak > 1 ? 's' : ''} in a row`,
                 multiplier: payoutMultiplier,
                 reason: reasons.WON_WAGER

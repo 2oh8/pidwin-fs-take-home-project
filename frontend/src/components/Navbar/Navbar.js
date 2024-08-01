@@ -41,13 +41,13 @@ const Navbar = () => {
           component={Link}
           className="honk"
           to="/"
-          sx={{ ...styles.heading, whiteSpace: 'nowrap', color: "white" }}
+          sx={{ ...styles.heading, whiteSpace: 'nowrap', color: "white", p: 0 }}
           variant="h1"
           align="left"
         >
           Gamblin' Jack's
         </Typography>
-        <Typography variant="h3"
+        <Typography variant="h5"
           sx={{
             p: 1,
             color: "white",
@@ -61,8 +61,8 @@ const Navbar = () => {
           "Even a broken clock is right twice a day"
         </Typography> */}
         {user !== "null" && user !== null ? (
-          <Stack justifyContent={"center"} direction="column">
-            <Typography className="honk" sx={{ ...styles.userName, color: 'white', mt: 2 }} variant="h4">
+          <Stack justifyContent={"space-between"} direction="row">
+            <Typography className="honk" sx={{ ...styles.userName, color: 'white',  }} variant="h4">
               {user.name}
             </Typography>
             <Button
